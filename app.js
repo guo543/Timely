@@ -11,13 +11,17 @@ const requestTime = function (req, res, next) {
     next()
 }
 
+app.use( express.static('./web') )
+
 app.use(myLogger)
 app.use(requestTime)
 
-app.get('/', (req, res) => {
+app.get('/time', (req, res) => {
     let responseText = 'Hello World!<br>'
     responseText += `<small>Requested at: ${req.requestTime}</small>`
     res.send(responseText)
 })
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log('Server listening at port 3000')
+})
